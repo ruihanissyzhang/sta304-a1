@@ -13,11 +13,8 @@
       <pubDate>Sat, 26 Sep 2020 21:13:14 -0500</pubDate>
       
       <guid>/2020/09/26/problem-set1/</guid>
-      <description>Part1. Abstraction My abstract. We use Wickham et al. (2019). # Introduction my introduction.
- Data introduction Introduce the scenario and study objectives.
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min.</description>
+      <description>Part1. Abstraction My abstract. We use Wickham et al. (2019).
+ Introduction This dataset is about the outbreaks in Toronto healthcare institutions (including hospitals, long-term care homes and retirement homes). These healthcare institutions have the responsibility to monitor staff and patients/residents for signs and symptoms of gastroenteric and respiratory such as nausea, vomiting, diarrhea, fever, cough, runny nose and sore throat. If the rate of infection or illness increase locally or higher than expectation,we call it “outbreak”.</description>
     </item>
     
   </channel>

@@ -62,7 +62,7 @@
 
   <article class="article">
     
-    <span class="article-duration">1 min read</span>
+    <span class="article-duration">3 min read</span>
     
 
     <h1 class="article-title">problem set1</h1>
@@ -77,49 +77,116 @@
 
 <div id="part1.-abstraction" class="section level1">
 <h1>Part1. Abstraction</h1>
-<p>My abstract. We use <span class="citation">Wickham et al. (2019)</span>.
-# Introduction
-my introduction.</p>
+<p>My abstract. We use <span class="citation">Wickham et al. (2019)</span>.</p>
+</div>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This dataset is about the outbreaks in Toronto healthcare institutions
+(including hospitals, long-term care homes and retirement homes).
+These healthcare institutions have the responsibility to monitor staff
+and patients/residents for signs and symptoms of gastroenteric and respiratory
+such as nausea, vomiting, diarrhea, fever, cough, runny nose and sore throat.
+If the rate of infection or illness increase locally or higher than expectation,we call it “outbreak”.</p>
 </div>
 <div id="data-introduction" class="section level1">
 <h1>Data introduction</h1>
 <p>Introduce the scenario and study objectives.</p>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>You can embed an R code chunk like this:</p>
-<pre class="r"><code>summary(cars)
-##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00
-fit &lt;- lm(dist ~ speed, data = cars)
-fit
-## 
-## Call:
-## lm(formula = dist ~ speed, data = cars)
-## 
-## Coefficients:
-## (Intercept)        speed  
-##     -17.579        3.932</code></pre>
+<p>Outbreak setting: The type of facility, in terms of the type of healthcare provided</p>
+<p>Type of outbreak: The mode of transmission classification description of the outbreak</p>
+<p>Causative agent-1: The aetiological agent(s) that have been identified from one or more outbreak-related cases, when an agent is confirmed.</p>
+<p>Time: the time of breakout last.</p>
+<p>I removed some variables from the original data, here is the reasons I removed them:</p>
+<p>Causative Agent - 2:</p>
 </div>
-<div id="including-plots" class="section level1">
-<h1>Including Plots</h1>
-<p>You can also embed plots. See Figure <a href="#fig:pie">1</a> for example:</p>
-<pre class="r"><code>par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c(&#39;Sky&#39;, &#39;Sunny side of pyramid&#39;, &#39;Shady side of pyramid&#39;),
-  col = c(&#39;#0292D8&#39;, &#39;#F7EA39&#39;, &#39;#C4B632&#39;),
-  init.angle = -50, border = NA
-)</code></pre>
-<div class="figure"><span id="fig:pie"></span>
-<img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png" alt="A fancy pie chart." width="672" />
-<p class="caption">
-Figure 1: A fancy pie chart.
-</p>
-</div>
+<div id="code-part" class="section level1">
+<h1>Code part</h1>
+<pre class="r"><code>install.packages(&quot;opendatatoronto&quot;)
+## Installing package into &#39;/home/rstudio-user/R/x86_64-pc-linux-gnu-library/4.0&#39;
+## (as &#39;lib&#39; is unspecified)
+library(opendatatoronto)
+library(dplyr)
+## 
+## Attaching package: &#39;dplyr&#39;
+## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag
+## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union
+
+library(tidyverse)
+## ── Attaching packages ────────────────────────────────────────── tidyverse 1.3.0 ──
+## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
+## ✓ tibble  3.0.3     ✓ stringr 1.4.0
+## ✓ tidyr   1.1.2     ✓ forcats 0.5.0
+## ✓ readr   1.3.1
+## ── Conflicts ───────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+# get package
+package &lt;- show_package(&quot;80ce0bd7-adb2-4568-b9d7-712f6ba38e4e&quot;)
+package
+## # A tibble: 1 x 10
+##   title id    topics civic_issues excerpt dataset_category num_resources formats
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;  
+## 1 Outb… 80ce… &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;                         6 &lt;NA&gt;   
+## # … with 2 more variables: refresh_rate &lt;chr&gt;, last_refreshed &lt;date&gt;
+
+resources &lt;- list_package_resources(&quot;80ce0bd7-adb2-4568-b9d7-712f6ba38e4e&quot;)
+datastore_resources &lt;- filter(resources, tolower(format)%in%c(&#39;xlsx&#39;,&#39;ob_report_2020&#39;))
+
+data &lt;- filter(datastore_resources,row_number()==2) %&gt;% get_resource()
+data
+## # A tibble: 344 x 9
+##    `Institution Na… `Institution Ad… `Outbreak Setti… `Type of Outbre…
+##    &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           
+##  1 Toronto Western… 399 Bathurst St  Hospital-Acute … Enteric         
+##  2 Terraces of Bay… 55 Ameer Ave     Retirement Home  Respiratory     
+##  3 Humber Valley T… 95 Humber Colle… LTCH             Respiratory     
+##  4 Norwood Nursing… 122 Tyndall Ave  LTCH             Respiratory     
+##  5 Fairview Nursin… 14 Cross St      LTCH             Respiratory     
+##  6 Deerwood Creek … 70 Humberline Dr LTCH             Enteric         
+##  7 Pine Villa Tran… 1035 Eglinton A… LTCH             Respiratory     
+##  8 Donway Place Re… 8 The Donway E   Retirement Home  Respiratory     
+##  9 Fieldstone Comm… 1000 Ellesmere … LTCH             Respiratory     
+## 10 Maynard Nursing… 28 Halton St     LTCH             Respiratory     
+## # … with 334 more rows, and 5 more variables: `Causative Agent - 1` &lt;chr&gt;,
+## #   `Causative Agent - 2` &lt;chr&gt;, `Date Outbreak Began` &lt;dttm&gt;, `Date Declared
+## #   Over` &lt;dttm&gt;, Active &lt;chr&gt;
+
+
+colSums(is.na(data))
+##    Institution Name Institution Address    Outbreak Setting    Type of Outbreak 
+##                   0                   1                   1                   1 
+## Causative Agent - 1 Causative Agent - 2 Date Outbreak Began  Date Declared Over 
+##                   1                 325                   1                   8 
+##              Active 
+##                   1
+
+data1 = data %&gt;%
+  select(-`Causative Agent - 2`)
+
+data1 = data1[!data1$`Causative Agent - 1` %in% c(&#39;Unable to identify&#39;),]
+
+data1$`time` = difftime(data1$`Date Declared Over`,data1$`Date Outbreak Began`,units=&quot;days&quot;)
+
+
+data1 = data1 %&gt;%
+  select(-`Institution Address`)
+
+data1 = data1[!data1$Active %in% c(&#39;Y&#39;),]
+
+data1 = data1 %&gt;%
+  select(-Active)
+
+data1 = data1 %&gt;%
+  select(-`Date Outbreak Began`, -`Date Declared Over`)
+
+ggplot(data = data1,aes(x = `time`)) + 
+  geom_histogram(color=&#39;grey&#39;, fill=&#39;purple&#39;,bins= 10)
+## Don&#39;t know how to automatically pick scale for object of type difftime. Defaulting to continuous.
+## Warning: Removed 1 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/outbreak-1.png" width="672" /></p>
 </div>
 <div id="reference" class="section level1 unnumbered">
 <h1>Reference</h1>
@@ -165,6 +232,9 @@ Figure 1: A fancy pie chart.
 
 
     
+<script src="../../../../js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 
     
   </body>

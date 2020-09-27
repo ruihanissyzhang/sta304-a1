@@ -12,34 +12,76 @@ knitr::opts_chunk$set(collapse = TRUE)
 ```
 # Part1. Abstraction
 My abstract. We use @citetidyverse.
+
+
 # Introduction
-my introduction.
+This dataset is about the outbreaks in Toronto healthcare institutions
+(including hospitals, long-term care homes and retirement homes). 
+These healthcare institutions have the responsibility to monitor staff 
+and patients/residents for signs and symptoms of gastroenteric and respiratory
+such as nausea, vomiting, diarrhea, fever, cough, runny nose and sore throat.
+If the rate of infection or illness increase locally or higher than expectation,we call it "outbreak".
 
 # Data introduction
 Introduce the scenario and study objectives.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Outbreak setting: The type of facility, in terms of the type of healthcare    provided
 
-You can embed an R code chunk like this:
+Type of outbreak: The mode of transmission classification description of the outbreak
 
-```{r cars}
-summary(cars)
-fit <- lm(dist ~ speed, data = cars)
-fit
+Causative agent-1: The aetiological agent(s) that have been identified from one or more outbreak-related cases, when an agent is confirmed.
+
+Time: the time of breakout last.
+
+I removed some variables from the original data, here is the reasons I removed them:
+
+Causative Agent - 2: 
+
+# Code part
+
+```{r outbreak}
+install.packages("opendatatoronto")
+library(opendatatoronto)
+library(dplyr)
+
+library(tidyverse)
+# get package
+package <- show_package("80ce0bd7-adb2-4568-b9d7-712f6ba38e4e")
+package
+
+resources <- list_package_resources("80ce0bd7-adb2-4568-b9d7-712f6ba38e4e")
+datastore_resources <- filter(resources, tolower(format)%in%c('xlsx','ob_report_2020'))
+
+data <- filter(datastore_resources,row_number()==2) %>% get_resource()
+data
+
+
+colSums(is.na(data))
+
+data1 = data %>%
+  select(-`Causative Agent - 2`)
+
+data1 = data1[!data1$`Causative Agent - 1` %in% c('Unable to identify'),]
+
+data1$`time` = difftime(data1$`Date Declared Over`,data1$`Date Outbreak Began`,units="days")
+
+
+data1 = data1 %>%
+  select(-`Institution Address`)
+
+data1 = data1[!data1$Active %in% c('Y'),]
+
+data1 = data1 %>%
+  select(-Active)
+
+data1 = data1 %>%
+  select(-`Date Outbreak Began`, -`Date Declared Over`)
+
+ggplot(data = data1,aes(x = `time`)) + 
+  geom_histogram(color='grey', fill='purple',bins= 10)
+
 ```
 
-# Including Plots
 
-You can also embed plots. See Figure \@ref(fig:pie) for example:
-
-```{r pie, fig.cap='A fancy pie chart.', tidy=FALSE}
-par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c('Sky', 'Sunny side of pyramid', 'Shady side of pyramid'),
-  col = c('#0292D8', '#F7EA39', '#C4B632'),
-  init.angle = -50, border = NA
-)
-```
 
 # Reference
