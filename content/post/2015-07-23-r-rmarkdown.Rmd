@@ -48,7 +48,7 @@ I calculate the difference between the over date and the start date, such that I
 Active: 'Active' shows the status of outbreaks due on the report date. If the outbreaks still active on the due date, it is meanless to study on the length of time for the outbreaks. Such that I removed the data that show 'yes' in the 'Active' variable first. Since rest of 'Active' are all 'no', I delete this variable.
 
 # Code part
-
+Code also available from Github.
 ```{r outbreak}
 install.packages("opendatatoronto")
 library(opendatatoronto)
@@ -110,6 +110,7 @@ From the plot of the time and count, I found that for most institutions the last
 And the number of outbreaks happened in long-term care homes is obviously greater than any other type of healthcare institutions. This maybe because the patients in the long-term care homes are mostly elder people with Poor physical condition. This leads to the poor immunity for the patients. Therefore, this type of healthcare institutions have highier proportion in outbreaks.
 
 Therefore, we can pay more attention to protect the long-term care homes from COVID-19, and we know that the best isolation period is longer than two weeks.
+
 
 # Reference
 https://open.toronto.ca/dataset/outbreaks-in-toronto-healthcare-institutions/
