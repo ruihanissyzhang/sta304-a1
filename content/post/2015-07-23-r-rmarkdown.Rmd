@@ -6,8 +6,7 @@ bibliography: "references.bib"
 categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
 ---
-# author:
-Ruihan Zhang
+# Author: Ruihan Zhang
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 ```
