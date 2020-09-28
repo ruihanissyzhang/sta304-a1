@@ -14,8 +14,7 @@ tags: ["R Markdown", "plot", "regression"]
 </div>
 <div id="abstraction" class="section level1">
 <h1>Abstraction</h1>
-<p>During COVID-19,healthcare institutions are the first line of the outbreaks, my goal is to find the most regular continued time for COVID_19 outbreaks. In addition, I want to find the type of healthcare institutions that outbreaks most possible to happen.</p>
-<p>I use <span class="citation">Wickham et al. (2019)</span>, <span class="citation">Gelfand (2020)</span>， <span class="citation">Wickham et al. (2020)</span>.</p>
+<p>During COVID-19, healthcare institutions are the first line of the epidemic outbreaks. In order to help these healthcare institutions to prepare better in epidemic prevention, my goal is to find the most regular continued time for COVID_19 outbreaks. In addition, I want to find the type of healthcare institutions that outbreaks most possible to happen.</p>
 </div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
@@ -25,7 +24,8 @@ tags: ["R Markdown", "plot", "regression"]
 and patients/residents for signs and symptoms of gastroenteric and respiratory
 such as nausea, vomiting, diarrhea, fever, cough, runny nose and sore throat.</p>
 <p>If the rate of infection or illness increase locally or higher than expectation,we call it “outbreak”.</p>
-<p>In this study, I want to find out the regular last time of the outbreaks in these healthcare institutions, and which type of institutions is most possible to have outbreaks.</p>
+<p>In this study, I want to find out the regular continued time of the outbreaks in these healthcare institutions, and which type of institutions is most possible to have outbreaks.</p>
+<p>I use <span class="citation">Wickham et al. (2019)</span>, <span class="citation">Gelfand (2020)</span>， <span class="citation">Wickham et al. (2020)</span>.</p>
 </div>
 <div id="data-discussion" class="section level1">
 <h1>Data discussion</h1>
@@ -38,6 +38,7 @@ such as nausea, vomiting, diarrhea, fever, cough, runny nose and sore throat.</p
 <p>Causative Agent - 2: There are too many missing data in this variables</p>
 <p>Date Outbreak Began and Date Declared Over:
 I calculate the difference between the over date and the start date, such that I removed the start and over time for the outbreaks.</p>
+<p>Active: ‘Active’ shows the status of outbreaks due on the report date. If the outbreaks still active on the due date, it is meanless to study on the length of time for the outbreaks. Such that I removed the data that show ‘yes’ in the ‘Active’ variable first. Since rest of ‘Active’ are all ‘no’, I delete this variable.</p>
 </div>
 <div id="code-part" class="section level1">
 <h1>Code part</h1>

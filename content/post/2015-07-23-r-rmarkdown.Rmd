@@ -11,10 +11,7 @@ tags: ["R Markdown", "plot", "regression"]
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 # Abstraction
-During COVID-19,healthcare institutions are the first line of the outbreaks, my goal is to find the most regular continued time for COVID_19 outbreaks. In addition, I want to find the type of healthcare institutions that outbreaks most possible to happen.
-
-I use @citetidyverse, @citeopendatatoronto， @citedplyr.
-
+During COVID-19, healthcare institutions are the first line of the epidemic outbreaks. In order to help these healthcare institutions to prepare better in epidemic prevention, my goal is to find the most regular continued time for COVID_19 outbreaks. In addition, I want to find the type of healthcare institutions that outbreaks most possible to happen.
 
 # Introduction
 This dataset is about the outbreaks in Toronto healthcare institutions
@@ -26,7 +23,9 @@ such as nausea, vomiting, diarrhea, fever, cough, runny nose and sore throat.
 
 If the rate of infection or illness increase locally or higher than expectation,we call it "outbreak".
 
-In this study, I want to find out the regular last time of the outbreaks in these healthcare institutions, and which type of institutions is most possible to have outbreaks.
+In this study, I want to find out the regular continued time of the outbreaks in these healthcare institutions, and which type of institutions is most possible to have outbreaks.
+
+I use @citetidyverse, @citeopendatatoronto， @citedplyr.
 
 # Data discussion
 Here is the introduction for the variables I observed.
@@ -46,7 +45,7 @@ Causative Agent - 2: There are too many missing data in this variables
 Date Outbreak Began and Date Declared Over:
 I calculate the difference between the over date and the start date, such that I removed the start and over time for the outbreaks.
 
-
+Active: 'Active' shows the status of outbreaks due on the report date. If the outbreaks still active on the due date, it is meanless to study on the length of time for the outbreaks. Such that I removed the data that show 'yes' in the 'Active' variable first. Since rest of 'Active' are all 'no', I delete this variable.
 
 # Code part
 
