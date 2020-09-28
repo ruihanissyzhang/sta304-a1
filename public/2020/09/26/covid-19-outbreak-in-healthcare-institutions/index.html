@@ -77,7 +77,7 @@
 
 <div id="abstraction" class="section level1">
 <h1>Abstraction</h1>
-<p>During COVID-19,healthcare institutions are the first line of the outbreak, my goal is to find the most regular continued time for COVID_19 outbreak. In addition, I want to find the type of healthcare institutions that outbreak most possible to happen.</p>
+<p>During COVID-19,healthcare institutions are the first line of the outbreaks, my goal is to find the most regular continued time for COVID_19 outbreaks. In addition, I want to find the type of healthcare institutions that outbreaks most possible to happen.</p>
 <p>We use <span class="citation">Wickham et al. (2019)</span>.</p>
 </div>
 <div id="introduction" class="section level1">
@@ -88,7 +88,7 @@ These healthcare institutions have the responsibility to monitor staff
 and patients/residents for signs and symptoms of gastroenteric and respiratory
 such as nausea, vomiting, diarrhea, fever, cough, runny nose and sore throat.
 If the rate of infection or illness increase locally or higher than expectation,we call it “outbreak”.
-In this study, I want to find out the regular last time of the outbreak in these healthcare institutions, and which type of institutions is most possible to have outbreak.</p>
+In this study, I want to find out the regular last time of the outbreaks in these healthcare institutions, and which type of institutions is most possible to have outbreaks.</p>
 </div>
 <div id="data-discussion" class="section level1">
 <h1>Data discussion</h1>
@@ -100,7 +100,7 @@ In this study, I want to find out the regular last time of the outbreak in these
 <p>I removed some variables from the original data, here is the reasons I removed them:</p>
 <p>Causative Agent - 2: There are too many missing data in this variables</p>
 <p>Date Outbreak Began and Date Declared Over:
-I calculate the difference between the over date and the start date, such that I removed the start and over time for the outbreak</p>
+I calculate the difference between the over date and the start date, such that I removed the start and over time for the outbreak.</p>
 </div>
 <div id="code-part" class="section level1">
 <h1>Code part</h1>
@@ -207,7 +207,7 @@ ggplot(data = data1,aes(x = `Outbreak Setting`)) +
 <div id="graph-discussion" class="section level1">
 <h1>Graph Discussion</h1>
 <p>From the plot of the time and count, I found that for most institutions the last time of COVID-19 outbreak is two weeks.</p>
-<p>And the number of outbreak happened in long-term care homes is obviously greater than any other type of healthcare institutions. This maybe because the patients in the long-term care homes are mostly elder people with Poor physical condition. This leads to the poor immunity for the patients. Therefore, this type of healthcare institutions have highier proportion in outbreak.</p>
+<p>And the number of outbreak happened in long-term care homes is obviously greater than any other type of healthcare institutions. This maybe because the patients in the long-term care homes are mostly elder people with Poor physical condition. This leads to the poor immunity for the patients. Therefore, this type of healthcare institutions have highier proportion in outbreaks.</p>
 </div>
 <div id="reference" class="section level1">
 <h1>Reference</h1>
