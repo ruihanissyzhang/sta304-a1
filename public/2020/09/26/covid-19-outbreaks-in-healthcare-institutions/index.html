@@ -6,8 +6,8 @@
 <meta name="generator" content="Hugo 0.75.1" />
 
 
-<title>COVID-19 Outbreak in Healthcare Institutions - sta304 a1</title>
-<meta property="og:title" content="COVID-19 Outbreak in Healthcare Institutions - sta304 a1">
+<title>COVID-19 Outbreaks in Healthcare Institutions - sta304 a1</title>
+<meta property="og:title" content="COVID-19 Outbreaks in Healthcare Institutions - sta304 a1">
 
 
   <link href='../../../../favicon.ico' rel='icon' type='image/x-icon'/>
@@ -65,7 +65,7 @@
     <span class="article-duration">5 min read</span>
     
 
-    <h1 class="article-title">COVID-19 Outbreak in Healthcare Institutions</h1>
+    <h1 class="article-title">COVID-19 Outbreaks in Healthcare Institutions</h1>
 
     
     <span class="article-date">2020-09-26</span>
@@ -87,24 +87,24 @@
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 <p>This dataset is about the outbreaks in Toronto healthcare institutions
-(including hospitals, long-term care homes and retirement homes).
-These healthcare institutions have the responsibility to monitor staff
+(including hospitals, long-term care homes and retirement homes).</p>
+<p>These healthcare institutions have the responsibility to monitor staff
 and patients/residents for signs and symptoms of gastroenteric and respiratory
-such as nausea, vomiting, diarrhea, fever, cough, runny nose and sore throat.
-If the rate of infection or illness increase locally or higher than expectation,we call it “outbreak”.
-In this study, I want to find out the regular last time of the outbreaks in these healthcare institutions, and which type of institutions is most possible to have outbreaks.</p>
+such as nausea, vomiting, diarrhea, fever, cough, runny nose and sore throat.</p>
+<p>If the rate of infection or illness increase locally or higher than expectation,we call it “outbreak”.</p>
+<p>In this study, I want to find out the regular last time of the outbreaks in these healthcare institutions, and which type of institutions is most possible to have outbreaks.</p>
 </div>
 <div id="data-discussion" class="section level1">
 <h1>Data discussion</h1>
 <p>Here is the introduction for the variables I observed.</p>
-<p>Outbreak setting: The type of healthcare institutions provided and have outbreak.</p>
-<p>Type of outbreak: Classification and description of outbreak transmission mode.</p>
+<p>Outbreak setting: The type of healthcare institutions provided and have outbreaks.</p>
+<p>Type of outbreak: Classification and description of outbreaks transmission mode.</p>
 <p>Causative agent-1: Because we want to discuss about COVID-19, I removed the data excluding COVID-19.</p>
-<p>Time: The time of outbreak last.</p>
-<p>I removed some variables from the original data, here is the reasons I removed them:</p>
+<p>Time: The time of outbreaks last.</p>
+<p>I removed some variables from the original data, and here is the reasons I removed them:</p>
 <p>Causative Agent - 2: There are too many missing data in this variables</p>
 <p>Date Outbreak Began and Date Declared Over:
-I calculate the difference between the over date and the start date, such that I removed the start and over time for the outbreak.</p>
+I calculate the difference between the over date and the start date, such that I removed the start and over time for the outbreaks.</p>
 </div>
 <div id="code-part" class="section level1">
 <h1>Code part</h1>
@@ -210,8 +210,8 @@ ggplot(data = data1,aes(x = `Outbreak Setting`)) +
 </div>
 <div id="graph-discussion" class="section level1">
 <h1>Graph Discussion</h1>
-<p>From the plot of the time and count, I found that for most institutions the last time of COVID-19 outbreak is two weeks.</p>
-<p>And the number of outbreak happened in long-term care homes is obviously greater than any other type of healthcare institutions. This maybe because the patients in the long-term care homes are mostly elder people with Poor physical condition. This leads to the poor immunity for the patients. Therefore, this type of healthcare institutions have highier proportion in outbreaks.</p>
+<p>From the plot of the time and count, I found that for most institutions the last time of COVID-19 outbreaks is two weeks.</p>
+<p>And the number of outbreaks happened in long-term care homes is obviously greater than any other type of healthcare institutions. This maybe because the patients in the long-term care homes are mostly elder people with Poor physical condition. This leads to the poor immunity for the patients. Therefore, this type of healthcare institutions have highier proportion in outbreaks.</p>
 <p>Therefore, we can pay more attention to protect the in long-term care homes from COVID-19, and we know that the best isolation period is longer than two weeks.</p>
 </div>
 <div id="reference" class="section level1">

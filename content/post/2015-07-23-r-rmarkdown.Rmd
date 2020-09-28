@@ -1,47 +1,51 @@
 ---
-title: "COVID-19 Outbreak in Healthcare Institutions"
+title: "COVID-19 Outbreaks in Healthcare Institutions"
 author: "ruihan zhang"
 date: 2020-09-26T21:13:14-05:00
 bibliography: "references.bib"
 categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
 ---
-
+# author:
+Ruihan Zhang
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 # Abstraction
 During COVID-19,healthcare institutions are the first line of the outbreaks, my goal is to find the most regular continued time for COVID_19 outbreaks. In addition, I want to find the type of healthcare institutions that outbreaks most possible to happen.
 
-We use @citetidyverse.
+I use @citetidyverse, @citeopendatatoronto， @citedplyr.
 
 
 # Introduction
 This dataset is about the outbreaks in Toronto healthcare institutions
 (including hospitals, long-term care homes and retirement homes). 
+
 These healthcare institutions have the responsibility to monitor staff 
 and patients/residents for signs and symptoms of gastroenteric and respiratory
 such as nausea, vomiting, diarrhea, fever, cough, runny nose and sore throat.
+
 If the rate of infection or illness increase locally or higher than expectation,we call it "outbreak".
+
 In this study, I want to find out the regular last time of the outbreaks in these healthcare institutions, and which type of institutions is most possible to have outbreaks.
 
 # Data discussion
 Here is the introduction for the variables I observed.
 
-Outbreak setting: The type of healthcare institutions provided and have outbreak.
+Outbreak setting: The type of healthcare institutions provided and have outbreaks.
 
-Type of outbreak: Classification and description of outbreak transmission mode.
+Type of outbreak: Classification and description of outbreaks transmission mode.
 
 Causative agent-1: Because we want to discuss about COVID-19, I removed the data excluding COVID-19.
 
-Time: The time of outbreak last.
+Time: The time of outbreaks last.
 
-I removed some variables from the original data, here is the reasons I removed them:
+I removed some variables from the original data, and here is the reasons I removed them:
 
 Causative Agent - 2: There are too many missing data in this variables
 
 Date Outbreak Began and Date Declared Over:
-I calculate the difference between the over date and the start date, such that I removed the start and over time for the outbreak.
+I calculate the difference between the over date and the start date, such that I removed the start and over time for the outbreaks.
 
 
 
@@ -103,11 +107,11 @@ ggplot(data = data1,aes(x = `Outbreak Setting`)) +
 ```
 
 # Graph Discussion
-From the plot of the time and count, I found that for most institutions the last time of COVID-19 outbreak is two weeks.
+From the plot of the time and count, I found that for most institutions the last time of COVID-19 outbreaks is two weeks.
 
-And the number of outbreak happened in long-term care homes is obviously greater than any other type of healthcare institutions. This maybe because the patients in the long-term care homes are mostly elder people with Poor physical condition. This leads to the poor immunity for the patients. Therefore, this type of healthcare institutions have highier proportion in outbreaks.
+And the number of outbreaks happened in long-term care homes is obviously greater than any other type of healthcare institutions. This maybe because the patients in the long-term care homes are mostly elder people with Poor physical condition. This leads to the poor immunity for the patients. Therefore, this type of healthcare institutions have highier proportion in outbreaks.
 
-
+Therefore, we can pay more attention to protect the in long-term care homes from COVID-19, and we know that the best isolation period is longer than two weeks.
 
 # Reference
 https://open.toronto.ca/dataset/outbreaks-in-toronto-healthcare-institutions/
