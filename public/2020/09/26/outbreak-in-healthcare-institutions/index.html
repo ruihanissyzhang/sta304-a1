@@ -1,12 +1,78 @@
----
-title: "COVID-19 Outbreak in Healthcare Institutions"
-author: "ruihan zhang"
-date: 2020-09-26T21:13:14-05:00
-bibliography: "references.bib"
-categories: ["R"]
-tags: ["R Markdown", "plot", "regression"]
----
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.75.1" />
 
+
+<title>Outbreak in healthcare institutions - sta304 a1</title>
+<meta property="og:title" content="Outbreak in healthcare institutions - sta304 a1">
+
+
+  <link href='../../../../favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="../../../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../../../css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="../../../../" class="nav-logo">
+    <img src="../../../../images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="../../../../about/">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">5 min read</span>
+    
+
+    <h1 class="article-title">Outbreak in healthcare institutions</h1>
+
+    
+    <span class="article-date">2020-09-26</span>
+    
+
+    <div class="article-content">
+      
 
 
 <div id="abstraction" class="section level1">
@@ -24,8 +90,8 @@ such as nausea, vomiting, diarrhea, fever, cough, runny nose and sore throat.
 If the rate of infection or illness increase locally or higher than expectation,we call it “outbreak”.
 In this study, I want to find out the regular last time of the outbreak in these healthcare institutions, and which type of institutions is most possible to have outbreak.</p>
 </div>
-<div id="data-discussion" class="section level1">
-<h1>Data discussion</h1>
+<div id="data-introduction" class="section level1">
+<h1>Data introduction</h1>
 <p>Here is the introduction for the variables I observed.</p>
 <p>Outbreak setting: The type of healthcare institutions provided and have outbreak.</p>
 <p>Type of outbreak: Classification and description of outbreak transmission mode.</p>
@@ -35,6 +101,11 @@ In this study, I want to find out the regular last time of the outbreak in these
 <p>Causative Agent - 2: There are too many missing data in this variables</p>
 <p>Date Outbreak Began and Date Declared Over:
 I calculate the difference between the over date and the start date, such that I removed the start and over time for the outbreak</p>
+</div>
+<div id="discuss" class="section level1">
+<h1>Discuss</h1>
+<p>From the plot of the time and count, I found that for most institutions the last time of COVID-19 outbreak is two weeks.</p>
+<p>And the number of outbreak happened in long-term care homes is obviously greater than any other type of healthcare institutions. This maybe because the patients in the long-term care homes are mostly elder people with Poor physical condition. This leads to the poor immunity for the patients. Therefore, this type of healthcare institutions have highier proportion in outbreak.</p>
 </div>
 <div id="code-part" class="section level1">
 <h1>Code part</h1>
@@ -132,16 +203,11 @@ data1$`Outbreak Setting` &lt;- ifelse(data1$`Outbreak Setting` == &#39;Hospital-
 ggplot(data = data1,aes(x = `time`)) + 
   geom_histogram(color=&#39;grey&#39;, fill=&#39;purple&#39;,bins= 10)
 ## Don&#39;t know how to automatically pick scale for object of type difftime. Defaulting to continuous.</code></pre>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/outbreak-1.png" width="672" /></p>
+<p><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/outbreak-1.png" width="672" /></p>
 <pre class="r"><code>
 ggplot(data = data1,aes(x = `Outbreak Setting`)) + 
   stat_count(color=&#39;white&#39;, fill=&#39;pink&#39;)</code></pre>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/outbreak-2.png" width="672" /></p>
-</div>
-<div id="graph-discussion" class="section level1">
-<h1>Graph Discussion</h1>
-<p>From the plot of the time and count, I found that for most institutions the last time of COVID-19 outbreak is two weeks.</p>
-<p>And the number of outbreak happened in long-term care homes is obviously greater than any other type of healthcare institutions. This maybe because the patients in the long-term care homes are mostly elder people with Poor physical condition. This leads to the poor immunity for the patients. Therefore, this type of healthcare institutions have highier proportion in outbreak.</p>
+<p><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/outbreak-2.png" width="672" /></p>
 </div>
 <div id="reference" class="section level1">
 <h1>Reference</h1>
@@ -152,3 +218,47 @@ ggplot(data = data1,aes(x = `Outbreak Setting`)) +
 </div>
 </div>
 </div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="../../../../index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="../../../../images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="../../../../js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

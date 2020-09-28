@@ -62,7 +62,7 @@
 
   <article class="article">
     
-    <span class="article-duration">3 min read</span>
+    <span class="article-duration">5 min read</span>
     
 
     <h1 class="article-title">problem set1</h1>
@@ -75,9 +75,10 @@
       
 
 
-<div id="part1.-abstraction" class="section level1">
-<h1>Part1. Abstraction</h1>
-<p>My abstract. We use <span class="citation">Wickham et al. (2019)</span>.</p>
+<div id="abstraction" class="section level1">
+<h1>Abstraction</h1>
+<p>During COVID-19,healthcare institutions are the first line of the outbreak, my goal is to find the most regular continued time for COVID_19 outbreak. In addition, I want to find the type of healthcare institutions that outbreak most possible to happen.</p>
+<p>We use <span class="citation">Wickham et al. (2019)</span>.</p>
 </div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
@@ -86,17 +87,25 @@
 These healthcare institutions have the responsibility to monitor staff
 and patients/residents for signs and symptoms of gastroenteric and respiratory
 such as nausea, vomiting, diarrhea, fever, cough, runny nose and sore throat.
-If the rate of infection or illness increase locally or higher than expectation,we call it “outbreak”.</p>
+If the rate of infection or illness increase locally or higher than expectation,we call it “outbreak”.
+In this study, I want to find out the regular last time of the outbreak in these healthcare institutions, and which type of institutions is most possible to have outbreak.</p>
 </div>
 <div id="data-introduction" class="section level1">
 <h1>Data introduction</h1>
-<p>Introduce the scenario and study objectives.</p>
-<p>Outbreak setting: The type of facility, in terms of the type of healthcare provided</p>
-<p>Type of outbreak: The mode of transmission classification description of the outbreak</p>
-<p>Causative agent-1: The aetiological agent(s) that have been identified from one or more outbreak-related cases, when an agent is confirmed.</p>
-<p>Time: the time of breakout last.</p>
+<p>Here is the introduction for the variables I observed.</p>
+<p>Outbreak setting: The type of healthcare institutions provided and have outbreak.</p>
+<p>Type of outbreak: Classification and description of outbreak transmission mode.</p>
+<p>Causative agent-1: Because we want to discuss about COVID-19, I removed the data excluding COVID-19.</p>
+<p>Time: The time of outbreak last.</p>
 <p>I removed some variables from the original data, here is the reasons I removed them:</p>
-<p>Causative Agent - 2:</p>
+<p>Causative Agent - 2: There are too many missing data in this variables</p>
+<p>Date Outbreak Began and Date Declared Over:
+I calculate the difference between the over date and the start date, such that I removed the start and over time for the outbreak</p>
+</div>
+<div id="discuss" class="section level1">
+<h1>Discuss</h1>
+<p>From the plot of the time and count, I found that for most institutions the last time of COVID-19 outbreak is two weeks.</p>
+<p>And the number of outbreak happened in long-term care homes is obviously greater than any other type of healthcare institutions. This maybe because the patients in the long-term care homes are mostly elder people with Poor physical condition. This leads to the poor immunity for the patients. Therefore, this type of healthcare institutions have highier proportion in outbreak.</p>
 </div>
 <div id="code-part" class="section level1">
 <h1>Code part</h1>
@@ -166,7 +175,8 @@ colSums(is.na(data))
 data1 = data %&gt;%
   select(-`Causative Agent - 2`)
 
-data1 = data1[!data1$`Causative Agent - 1` %in% c(&#39;Unable to identify&#39;),]
+data1 = data1[data1$`Causative Agent - 1` %in% c(&#39;COVID-19&#39;),]
+
 
 data1$`time` = difftime(data1$`Date Declared Over`,data1$`Date Outbreak Began`,units=&quot;days&quot;)
 
@@ -182,14 +192,26 @@ data1 = data1 %&gt;%
 data1 = data1 %&gt;%
   select(-`Date Outbreak Began`, -`Date Declared Over`)
 
+
+data1$`Outbreak Setting` &lt;- ifelse(data1$`Outbreak Setting` == &#39;Hospital-Acute Care&#39;,  1, data1$`Outbreak Setting`);
+data1$`Outbreak Setting` &lt;- ifelse(data1$`Outbreak Setting` == &#39;Hospital-Psychiatric&#39;,  2, data1$`Outbreak Setting`);
+data1$`Outbreak Setting` &lt;- ifelse(data1$`Outbreak Setting` == &#39;LTCH&#39;,  3, data1$`Outbreak Setting`);
+data1$`Outbreak Setting` &lt;- ifelse(data1$`Outbreak Setting` == &#39;Retirement Home&#39;,  4, data1$`Outbreak Setting`);
+data1$`Outbreak Setting` &lt;- ifelse(data1$`Outbreak Setting` == &#39;Hospital-Chronic Care&#39;,  5, data1$`Outbreak Setting`);
+
+# Graph
 ggplot(data = data1,aes(x = `time`)) + 
   geom_histogram(color=&#39;grey&#39;, fill=&#39;purple&#39;,bins= 10)
-## Don&#39;t know how to automatically pick scale for object of type difftime. Defaulting to continuous.
-## Warning: Removed 1 rows containing non-finite values (stat_bin).</code></pre>
+## Don&#39;t know how to automatically pick scale for object of type difftime. Defaulting to continuous.</code></pre>
 <p><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/outbreak-1.png" width="672" /></p>
+<pre class="r"><code>
+ggplot(data = data1,aes(x = `Outbreak Setting`)) + 
+  stat_count(color=&#39;white&#39;, fill=&#39;pink&#39;)</code></pre>
+<p><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/outbreak-2.png" width="672" /></p>
 </div>
-<div id="reference" class="section level1 unnumbered">
+<div id="reference" class="section level1">
 <h1>Reference</h1>
+<p><a href="https://open.toronto.ca/dataset/outbreaks-in-toronto-healthcare-institutions/" class="uri">https://open.toronto.ca/dataset/outbreaks-in-toronto-healthcare-institutions/</a></p>
 <div id="refs" class="references">
 <div id="ref-citetidyverse">
 <p>Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. “Welcome to the tidyverse.” <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.</p>

@@ -1,5 +1,5 @@
 ---
-title: "problem set1"
+title: "COVID-19 Outbreak in Healthcare Institutions"
 author: "ruihan zhang"
 date: 2020-09-26T21:13:14-05:00
 bibliography: "references.bib"
@@ -10,8 +10,10 @@ tags: ["R Markdown", "plot", "regression"]
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 ```
-# Part1. Abstraction
-My abstract. We use @citetidyverse.
+# Abstraction
+During COVID-19,healthcare institutions are the first line of the outbreak, my goal is to find the most regular continued time for COVID_19 outbreak. In addition, I want to find the type of healthcare institutions that outbreak most possible to happen.
+
+We use @citetidyverse.
 
 
 # Introduction
@@ -21,21 +23,27 @@ These healthcare institutions have the responsibility to monitor staff
 and patients/residents for signs and symptoms of gastroenteric and respiratory
 such as nausea, vomiting, diarrhea, fever, cough, runny nose and sore throat.
 If the rate of infection or illness increase locally or higher than expectation,we call it "outbreak".
+In this study, I want to find out the regular last time of the outbreak in these healthcare institutions, and which type of institutions is most possible to have outbreak.
 
-# Data introduction
-Introduce the scenario and study objectives.
+# Data discussion
+Here is the introduction for the variables I observed.
 
-Outbreak setting: The type of facility, in terms of the type of healthcare    provided
+Outbreak setting: The type of healthcare institutions provided and have outbreak.
 
-Type of outbreak: The mode of transmission classification description of the outbreak
+Type of outbreak: Classification and description of outbreak transmission mode.
 
-Causative agent-1: The aetiological agent(s) that have been identified from one or more outbreak-related cases, when an agent is confirmed.
+Causative agent-1: Because we want to discuss about COVID-19, I removed the data excluding COVID-19.
 
-Time: the time of breakout last.
+Time: The time of outbreak last.
 
 I removed some variables from the original data, here is the reasons I removed them:
 
-Causative Agent - 2: 
+Causative Agent - 2: There are too many missing data in this variables
+
+Date Outbreak Began and Date Declared Over:
+I calculate the difference between the over date and the start date, such that I removed the start and over time for the outbreak
+
+
 
 # Code part
 
@@ -61,7 +69,8 @@ colSums(is.na(data))
 data1 = data %>%
   select(-`Causative Agent - 2`)
 
-data1 = data1[!data1$`Causative Agent - 1` %in% c('Unable to identify'),]
+data1 = data1[data1$`Causative Agent - 1` %in% c('COVID-19'),]
+
 
 data1$`time` = difftime(data1$`Date Declared Over`,data1$`Date Outbreak Began`,units="days")
 
@@ -77,11 +86,28 @@ data1 = data1 %>%
 data1 = data1 %>%
   select(-`Date Outbreak Began`, -`Date Declared Over`)
 
+
+data1$`Outbreak Setting` <- ifelse(data1$`Outbreak Setting` == 'Hospital-Acute Care',  1, data1$`Outbreak Setting`);
+data1$`Outbreak Setting` <- ifelse(data1$`Outbreak Setting` == 'Hospital-Psychiatric',  2, data1$`Outbreak Setting`);
+data1$`Outbreak Setting` <- ifelse(data1$`Outbreak Setting` == 'LTCH',  3, data1$`Outbreak Setting`);
+data1$`Outbreak Setting` <- ifelse(data1$`Outbreak Setting` == 'Retirement Home',  4, data1$`Outbreak Setting`);
+data1$`Outbreak Setting` <- ifelse(data1$`Outbreak Setting` == 'Hospital-Chronic Care',  5, data1$`Outbreak Setting`);
+
+# Graph
 ggplot(data = data1,aes(x = `time`)) + 
   geom_histogram(color='grey', fill='purple',bins= 10)
 
+ggplot(data = data1,aes(x = `Outbreak Setting`)) + 
+  stat_count(color='white', fill='pink')
+
 ```
+
+# Graph Discussion
+From the plot of the time and count, I found that for most institutions the last time of COVID-19 outbreak is two weeks.
+
+And the number of outbreak happened in long-term care homes is obviously greater than any other type of healthcare institutions. This maybe because the patients in the long-term care homes are mostly elder people with Poor physical condition. This leads to the poor immunity for the patients. Therefore, this type of healthcare institutions have highier proportion in outbreak.
 
 
 
 # Reference
+https://open.toronto.ca/dataset/outbreaks-in-toronto-healthcare-institutions/
